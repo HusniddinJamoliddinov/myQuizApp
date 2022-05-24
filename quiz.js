@@ -12,6 +12,8 @@ const result = document.querySelector(".result");
 const newGame = document.querySelector(".newGame");
 const quizeZone = document.querySelector(".quiz-zone");
 const quizTimer = document.querySelector(".quizTimer");
+const winner = document.querySelector(".winner");
+const loser = document.querySelector(".loser");
 
 // LOGIC FUNCTIONS
 const generateAnswers = (corAnswer) => {
@@ -91,7 +93,7 @@ const data = setInterval(() => {
   quizTimer.innerText = `${Count}s`;
 }, 1000);
 
-let myTimeOut = setTimeout(GameOver, 5000 + Count * 1000); ////////////////////////////
+// let myTimeOut = setTimeout(GameOver, 5000 + Count * 1000); ////////////////////////////
 
 let togriJavobSoni = 0;
 function jadval(current, correct) {
@@ -109,7 +111,7 @@ function jadval(current, correct) {
     points.appendChild(point);
   }
   count++;
-  if (count === 15) GameOver();
+  if (count === 5) GameOver();
   // if (myTimeOut ||count == 15) {
   //   modalBg.style.display = "flex";
   //   result.addEventListener("click", () => {
@@ -130,8 +132,13 @@ function jadval(current, correct) {
 }
 
 function GameOver() {
-  // if ( count == 15) {
   modalBg.style.display = "flex";
+  if (togriJavobSoni * (100 / 5) >= 75) {
+    winner.classList.remove("hidden");
+  } else {
+    loser.classList.remove("hidden");
+  }
+
   result.addEventListener("click", () => {
     points.style.display = "grid";
     modalBg.classList.add("hidden");
